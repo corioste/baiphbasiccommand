@@ -1,0 +1,181 @@
+
+
+-----------------------------------BENCH OVERALL COMMAND-----------------------------------------
+
+-bench init [bench_name] 			#to initialize bench folder
+
+   -bench init [bench name] --frappe-branch version-12
+
+-bench get-app erpnext   			#get erpnext 
+
+   -bench get-app erpnext --branch version-12
+
+-bench new-app schoolapp			#create new app
+
+-bench new-site [sitename]			#create new site
+
+-bench --site [sitename] install-app [appname]	#install app in the site
+
+-bench --site [site-name] migrate/update	#to migrate/update selected site
+
+-bench start					#start bench
+
+--------------------------------
+
+3 Types of Doctypes
+1. Core Doctypes   - Created by frappe team
+2. Custom Doctypes - Created by developer outside frappe team
+3. Single Doctypes - Only one record
+
+-------------------------------------FRAPPE JS API
+curr_frm  #current form
+doc       #doctype / model
+set_value(<field-name>, "value") #use to set docfield value
+frappe.call({methods: <method-location>, args{<args-name>: <args-value>}, callback: function(r){r.message}})
+var child = cur_frm.add_child(<field-name>") #get child table
+cur_frm.clear_table(<field-name>) #clear table
+
+in hooks py
+doctype_js = {"<Doctype>": "public/js/<doctype>.js"} # to script core doctype
+-------------------------------------FRAPPE PY API
+frappe.get_doc(<doctype>, <docname>)
+def validate(self)
+
+----------------------------------CREATING REPORT SAMPLE
+
+
+
+def execute(filters=None):
+    data = []
+    row_list = get_data(filters)
+    columns = get_columns()
+
+    for i in row_list:
+        row = [i.student_id, i.full_name_field, i.birth_date, i.age, i.course]
+        data.append(row)
+
+    return columns, data
+
+
+def get_filter(filters):
+    conditions = ""
+
+    if filters.get("from_date") or filters.get("to_date"):
+        if filters.get("from_date") is not None and filters.get("to_date") is not None:
+            conditions += "WHERE birth_date >= %(from_date)s AND birth_date <= %(to_date)s"
+        elif filters.get("to_date") is None:
+            conditions += "WHERE birth_date >= %(from_date)s"
+        else:
+            conditions += "WHERE birth_date <= %(to_date)s"
+
+    return conditions
+
+
+def get_data(filters):
+    conditions = get_filter(filters)
+    return frappe.db.sql("""SELECT student_id, full_name_field, birth_date, age, course FROM `tabStudent Information` 
+    %s""" % conditions, filters, as_dict=1)
+
+
+def get_columns():
+    return [{
+        "fieldname": "student_id",
+        "label": "Student ID",
+        "width": 100
+        },
+        {
+            "fieldname": "full_name_field",
+            "label": "Name",
+            "width": 500
+        },
+        {
+            "fieldname": "birth_date",
+            "label": "Birth Date",
+            "width": 250
+        },
+        {
+            "fieldname": "age",
+            "label": "Age",
+            "width": 100
+        },
+        {
+            "fieldname": "course",
+            "label": "Course",
+            "width": 100
+
+        }]
+------------------------------------------CREATING FILTERS
+frappe.query_reports["Students Information Report"] = {
+	"filters": [
+	    {
+			"fieldname":"from_date",
+			"label": __("From Date"),
+			"fieldtype": "Date",
+			"width": "80"
+		},
+		{
+			"fieldname":"to_date",
+			"label": __("To Date"),
+			"fieldtype": "Date",
+		}
+	]
+}
+-------------------------------------PRINT FORMAT
+    <table>
+        <tr>
+            <th>ID NUMBER</th>
+            <th>FULL NAME</th>
+            <th>BIRTH DATE</th>
+            <th>AGE</th>
+        </tr>
+        <tr>
+            <td>
+
+                {%- for row in doc.list_of_students -%}
+                <tr>
+                    <td>{{row.student_id}}</td>
+                    <td>{{row.last_name +" "+row.first_name+" "+row.middle_name}}</td>
+                    <td>{{row.birth_date}}</td>
+                    <td>{{row.age}}</td>
+                </tr>
+                {%- endfor -%}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ doc.list_of_students|sum(attribute='age') }}</td>
+                </tr>
+            </td>
+
+-------------------------------------------------CONFIG DOCTYPE.py
+from frappe import _
+
+
+def get_data():
+    return [
+        {
+            "label": _("School App"),
+            "items": [
+                {
+                    "type": "doctype",
+                    "name": "Student Information",
+                },
+                {
+                    "type": "doctype",
+                    "name": "Courses",
+                },
+                {
+                    "type": "doctype",
+                    "name": "Subject",
+                },
+                {
+                    "type": "report",
+                    "name": "Students Information Report",
+                    "is_query_report": True
+                }
+            ]
+        }]
+
+        </tr>
+    </table>
+
