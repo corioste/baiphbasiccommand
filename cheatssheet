@@ -178,4 +178,22 @@ def get_data():
 
         </tr>
     </table>
+-----------------------------
+frappe.ui.form.on('List of Students', {
 
+	student_id: function(frm, cdt, cdn){
+	       var child_fields = locals[cdt][cdn]
+	       console.log(child_fields)
+           frappe.call({
+            method:"schoolapp.schoolapp.doctype.courses.courses.get_student_details",
+            args: {doc_name: child_fields.student_id!=null?child_fields.student_id:" "},
+            callback: function(r){
+                frappe.model.set_value(cdt, cdn, "first_name", r.message.first_name)
+                frappe.model.set_value(cdt, cdn, "middle_name", r.message.middle_name)
+                frappe.model.set_value(cdt, cdn, "last_name", r.message.last_name)
+                frappe.model.set_value(cdt, cdn, "birth_date", r.message.birth_date)
+                frappe.model.set_value(cdt, cdn, "age", r.message.age)
+            }
+       });
+	}
+});
