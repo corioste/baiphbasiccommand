@@ -1,0 +1,16 @@
+bench init gaserp_bench --frappe-branch version-12
+bench get-app erpnext --branch version-12
+bench get-app https://gitlab.com/bailabs/global_app
+bench get-app https://github.com/bailabs/authorizenet
+cd apps/global_app && ./core_changes.sh
+bench setup requirements
+source env/bin/activate
+pip install barcode
+pip install frontmatter
+bench new-site gaserpSite
+bench --site gaserpSite install-app erpnext
+bench --site gaserpSite install-app global_app
+bench --site gaserpSite install-app authorizenet
+bench --site gaserpSite clear-cache && bench --site gaserpSite build
+bench --site gaserpSite --force restore /path/to/sql/file
+bench --site gaserpSite migrate
