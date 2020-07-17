@@ -1,1 +1,6 @@
 sudo mysqld --tc-heuristic-recover=ROLLBACK sudo service mysqld start
+sudo mysqld --tc-heuristic-recover=ROLLBACK && sudo mysqld_safe --tc-heuristic-sudo service mysql restart
+
+sudo mysqld --tc-heuristic-recover=ROLLBACK
+sudo mysqld_safe --tc-heuristic
+sudo service mysql restart
