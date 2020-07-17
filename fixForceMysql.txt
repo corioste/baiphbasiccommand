@@ -1,0 +1,1 @@
+sudo mysqld --tc-heuristic-recover=ROLLBACK sudo service mysqld start
