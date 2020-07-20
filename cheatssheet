@@ -197,3 +197,7 @@ frappe.ui.form.on('List of Students', {
        });
 	}
 });
+
+---------------------------------------------------BACKGROUND
+enqueue('erpnext.erpnext_integrations.doctype.amazon_mws_settings.amazon_mws_settings.get_products_details',
+					queue='default', )
