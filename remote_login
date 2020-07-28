@@ -1,3 +1,6 @@
 ssh frappe1@35.239.120.144
 sudo -i
 su frappe
+
+gaserptest = ssh frappe1@35.239.120.144
+cobbtest = ssh frappe1@104.198.188.176 
