@@ -1,0 +1,3 @@
+ssh frappe1@35.239.120.144
+sudo -i
+su frappe
