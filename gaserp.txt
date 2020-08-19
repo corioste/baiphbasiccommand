@@ -1,6 +1,6 @@
-bench init gaserp_bench --frappe-branch version-12
+bench init <bench-name> --frappe-branch version-12
 bench get-app erpnext --branch version-12
-bench get-app https://gitlab.com/bailabs/global_app
+bench get-app https://gitlab.com/clapton23/global_app
 bench get-app https://github.com/bailabs/authorizenet
 cd apps/global_app && ./core_changes.sh
 bench setup requirements
@@ -12,7 +12,7 @@ bench --site gaserpSite install-app erpnext
 bench --site gaserpSite install-app global_app
 bench --site gaserpSite install-app authorizenet
 bench --site gaserpSite clear-cache && bench --site gaserpSite build
-ench --site gaserpSite --force restore /path/to/sql/file
+bench --site gaserpSite --force restore /path/to/sql/file
 bench --site gaserpSite migrate
 
 
