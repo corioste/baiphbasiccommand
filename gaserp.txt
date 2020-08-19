@@ -12,5 +12,10 @@ bench --site gaserpSite install-app erpnext
 bench --site gaserpSite install-app global_app
 bench --site gaserpSite install-app authorizenet
 bench --site gaserpSite clear-cache && bench --site gaserpSite build
-bench --site gaserpSite --force restore /path/to/sql/file
+ench --site gaserpSite --force restore /path/to/sql/file
 bench --site gaserpSite migrate
+
+
+COBB VERSION
+ang erpnext kay version 12.2.0
+ang frappe kay version 12.0.20
