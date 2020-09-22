@@ -1,0 +1,2 @@
+npm -g create-react-app  #install react app
+create-react-app <new-app> #create new app
