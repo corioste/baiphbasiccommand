@@ -6,8 +6,11 @@ npm install --save faker #get libraries
 COMPONENT LIFECYCLE
 
 class App extends React.Component{}
-constructor(props){super(props)}
-render(){}
-componentDidMount()
-componentDidUpdate()
-componentDidUnmount()
+constructor(props){super(props)} #one time initiate
+render(){} #view only
+componentDidMount() #for data loading
+componentDidUpdate() #for more loading
+componentDidUnmount() #for cleanup
+
+
+Component.defaultProps = {} #set default props
