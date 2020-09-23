@@ -2,3 +2,12 @@ npm -g create-react-app  #install react app
 create-react-app <new-app> #create new app
 npm start #start
 npm install --save faker #get libraries
+
+COMPONENT LIFECYCLE
+
+class App extends React.Component{}
+constructor(props){super(props)}
+render(){}
+componentDidMount()
+componentDidUpdate()
+componentDidUnmount()
