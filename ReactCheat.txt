@@ -14,3 +14,9 @@ componentDidUnmount() #for cleanup
 
 
 Component.defaultProps = {} #set default props
+
+HOOKS
+
+useState() #sames as state 
+useEffect(()=>{},[]) #control when executed [term] when term change, [] rerender once  ,null when rerender   
+useRef
