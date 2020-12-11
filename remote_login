@@ -2,8 +2,8 @@ ssh frappe1@35.239.120.144
 sudo -i
 su frappe
 
-gaserptest = ssh frappe1@35.239.120.144
-cobbtest = ssh frappe1@104.198.188.176 
+gaserptest = ssh frappe@104.198.38.144
+cobbtest = ssh frappe@35.222.90.241
 
 
 https://frappeframework.com/docs/user/en/api/form
